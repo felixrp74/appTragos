@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.inteli.ui.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        android:label="Tragos"
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_tragosDetalleFragment"
             app:destination="@id/tragosDetalleFragment" />
@@ -17,6 +17,6 @@
     <fragment
         android:id="@+id/tragosDetalleFragment"
         android:name="com.example.inteli.ui.TragosDetalleFragment"
-        android:label="fragment_tragos_detalle"
+        android:label="Detalles"
         tools:layout="@layout/fragment_tragos_detalle" />
 </navigation>
