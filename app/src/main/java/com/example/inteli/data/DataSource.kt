@@ -5,12 +5,8 @@ import com.example.inteli.vo.Resource
 
 class DataSource {
 
-    private val generateTragosList = listOf(
-        Drink("https://www.recetasdeescandalo.com/como-preparar-el-coctel-margarita-receta-e-ingredientes/","margarita","con azucar vodka y nueces"),
-        Drink("https://franchoxbar.wordpress.com/2018/07/16/fernandito-o-fernet-con-coca/","fernet","con azucar vodka y nueces")
-    )
-
-    fun getDrinksList():Resource<List<Drink>>{
-        return Resource.Success(generateTragosList)
-    }
+    val generateTragosList = Resource.Success(listOf(
+        Drink("https://cdn5.recetasdeescandalo.com/wp-content/uploads/2018/09/Coctel-margarita-como-prepararlo.-Receta-e-ingredientes.jpg","margarita","con azucar vodka y nueces"),
+        Drink("https://http2.mlstatic.com/D_NQ_NP_667140-MPE31254049113_062019-O.jpg","fernet","con azucar vodka y nueces")
+    ))
 }

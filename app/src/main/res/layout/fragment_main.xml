@@ -7,20 +7,23 @@
     android:orientation="vertical"
     tools:context=".ui.MainFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:id="@+id/progress_bar"
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/fragment_main"
-        android:textSize="25sp"
-        android:gravity="center"
-        />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn_ir_detalles"
-        android:layout_marginTop="16dp"
-        android:text="ir detalles"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <ProgressBar
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_tragos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
