@@ -1,4 +1,4 @@
-package com.example.inteli.data.base
+package com.example.inteli.base
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

@@ -1,18 +1,23 @@
 package com.example.inteli.ui
 
-import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.inteli.R
-import com.example.inteli.data.base.BaseViewHolder
+import com.example.inteli.base.BaseViewHolder
 import com.example.inteli.data.model.Drink
 import com.example.inteli.databinding.TragosRowBinding
 
-class MainAdapter(private val context: Context, private val tragosList: List<Drink>) :
-    RecyclerView.Adapter<BaseViewHolder<*>>() {
+class MainAdapter(private val tragosList: List<Drink>,
+    private val itemClickListener: OnTragoClickListener
+) : RecyclerView.Adapter<BaseViewHolder<*>>() {
+
+    interface OnTragoClickListener {
+        fun onTragoClick(drink: Drink)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
 
@@ -34,9 +39,18 @@ class MainAdapter(private val context: Context, private val tragosList: List<Dri
         private val binding = TragosRowBinding.bind(itemView)
 
         override fun bind(item: Drink, position: Int) {
-            Glide.with(binding.imgTrago.context).load(item.imagen).into(binding.imgTrago)
+            Glide.with(binding.imgTrago.context).load(item.imagen).centerCrop()
+                .into(binding.imgTrago)
             binding.txtTitulo.text = item.nombre
             binding.txtDescripcion.text = item.descripcion
+            /*binding.tragosRow.setOnClickListener {
+                itemClickListener.onTragoClick(item)
+            }*/
+
+            binding.tragosRow.setOnClickListener {
+                Log.d("CLICK","CLICKING")
+                itemClickListener.onTragoClick(item)
+            }
 
         }
 

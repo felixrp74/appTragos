@@ -5,19 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.inteli.R
 import com.example.inteli.data.DataSource
+import com.example.inteli.data.model.Drink
 import com.example.inteli.databinding.FragmentMainBinding
 import com.example.inteli.domain.RepoImpl
 import com.example.inteli.ui.viewmodel.MainViewModel
 import com.example.inteli.ui.viewmodel.VMFactory
 import com.example.inteli.vo.Resource
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
     private val viewModel by viewModels<MainViewModel> { VMFactory(RepoImpl(DataSource())) }
 
@@ -44,7 +48,7 @@ class MainFragment : Fragment() {
             when (result) {
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    binding.rvTragos.adapter = MainAdapter(requireContext(), result.data)
+                    binding.rvTragos.adapter = MainAdapter(result.data, this)
                 }
                 is Resource.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
@@ -83,6 +87,12 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onTragoClick(drink: Drink) {
+        val bundle = Bundle()
+        bundle.putParcelable("drink",drink)
+        findNavController().navigate(R.id.action_mainFragment_to_tragosDetalleFragment)
     }
 
 }
