@@ -68,6 +68,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    //implementation 'com.squareup.okhtttp3:logging-interceptor:3.11.0'
+
+    //PhotoView to zoom in and out image
+    //implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
 
     testImplementation 'junit:junit:4.13.2'

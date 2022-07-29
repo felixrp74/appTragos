@@ -8,11 +8,38 @@
     tools:context=".ui.MainFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <ImageView
+        android:id="@+id/iv_trago_detalle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="222dp"/>
+
+    <TextView
+        android:id="@+id/tv_titulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/fragment_tragos_detalle"
         android:textSize="25sp"
+        android:textStyle="bold"
         android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tv_con_alcohol"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:text="@string/fragment_tragos_detalle"
+        android:textSize="10sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_descripcion_detalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_tragos_detalle"
+        android:textSize="15sp"
+        android:textAlignment="inherit"/>
+
+
 
 </LinearLayout>
