@@ -13,5 +13,7 @@ data class Drink(
     @SerializedName("strDrink")
     val nombre: String = "",
     @SerializedName("strInstructions")
-    val descripcion:String = ""
-):Parcelable
+    val descripcion: String = ""
+) : Parcelable
+
+data class DrinkList(@SerializedName("drinks") val drinkList: List<Drink>)

@@ -4,5 +4,5 @@ import com.example.inteli.data.model.Drink
 import com.example.inteli.vo.Resource
 
 interface Repo {
-    fun getTragosList():Resource<List<Drink>>
+    suspend fun getTragosList(nameTrago: String): Resource<List<Drink>>
 }

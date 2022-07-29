@@ -11,7 +11,8 @@ import com.example.inteli.base.BaseViewHolder
 import com.example.inteli.data.model.Drink
 import com.example.inteli.databinding.TragosRowBinding
 
-class MainAdapter(private val tragosList: List<Drink>,
+class MainAdapter(
+    private val tragosList: List<Drink>,
     private val itemClickListener: OnTragoClickListener
 ) : RecyclerView.Adapter<BaseViewHolder<*>>() {
 
@@ -43,12 +44,9 @@ class MainAdapter(private val tragosList: List<Drink>,
                 .into(binding.imgTrago)
             binding.txtTitulo.text = item.nombre
             binding.txtDescripcion.text = item.descripcion
-            /*binding.tragosRow.setOnClickListener {
-                itemClickListener.onTragoClick(item)
-            }*/
 
-            binding.tragosRow.setOnClickListener {
-                Log.d("CLICK","CLICKING")
+            binding.imgTrago.setOnClickListener {
+                Log.d("CLICK", "CLICKING")
                 itemClickListener.onTragoClick(item)
             }
 

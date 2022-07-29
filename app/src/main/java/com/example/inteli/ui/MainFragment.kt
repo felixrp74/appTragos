@@ -1,11 +1,12 @@
 package com.example.inteli.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -43,15 +44,21 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+        setupSearchView()
+        setObervers()
 
+
+    }
+
+    private fun setObervers() {
         viewModel.fetchTragosList.observe(viewLifecycleOwner, Observer{ result ->
             when (result) {
+                is Resource.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
                     binding.rvTragos.adapter = MainAdapter(result.data, this)
-                }
-                is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
                 }
                 is Resource.Failure -> {
                     binding.progressBar.visibility = View.GONE
@@ -60,6 +67,8 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
                         "ocurrio eerrro trayendo datos ${result.exception}",
                         Toast.LENGTH_SHORT
                     ).show()
+
+                    Log.d("FAILURE_GET", "${result.exception}")
                 }
                 else -> {
                     Toast.makeText(
@@ -71,7 +80,22 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
             }
 
         })
+    }
 
+
+    private fun setupSearchView(){
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                Log.d("SEARCH_DRINK","$query")
+                viewModel.setTrago(query!!)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                Log.i("TAG","Llego al querytextchange")
+                return true
+            }
+        })
     }
 
     private fun setupRecyclerView() {
@@ -84,15 +108,15 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
         )
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     override fun onTragoClick(drink: Drink) {
         val bundle = Bundle()
         bundle.putParcelable("drink",drink)
-        findNavController().navigate(R.id.action_mainFragment_to_tragosDetalleFragment)
+        findNavController().navigate(R.id.tragosDetalleFragment, bundle)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

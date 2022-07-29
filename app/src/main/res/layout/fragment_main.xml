@@ -7,6 +7,11 @@
     android:orientation="vertical"
     tools:context=".ui.MainFragment">
 
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <RelativeLayout
         android:id="@+id/progress_bar"
         android:visibility="gone"
@@ -23,6 +28,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_tragos"
+        android:layout_marginTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
