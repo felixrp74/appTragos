@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.inteli.AppDatabase
 import com.example.inteli.R
 import com.example.inteli.data.DataSource
 import com.example.inteli.data.model.Drink
@@ -24,7 +26,8 @@ import com.example.inteli.vo.Resource
 
 class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
-    private val viewModel by viewModels<MainViewModel> { VMFactory(RepoImpl(DataSource())) }
+    private val viewModel by activityViewModels<MainViewModel> { VMFactory(RepoImpl(DataSource(
+        AppDatabase.getInstance(requireActivity().applicationContext)))) }
 
     private var _binding: FragmentMainBinding? = null
 
@@ -45,12 +48,15 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
         setupRecyclerView()
         setupSearchView()
-        setObervers()
+        setupObervers()
 
+        binding.btnDrinkFavoritos.setOnClickListener {
+            findNavController().navigate(R.id.favoritosFragment)
+        }
 
     }
 
-    private fun setObervers() {
+    private fun setupObervers() {
         viewModel.fetchTragosList.observe(viewLifecycleOwner, Observer{ result ->
             when (result) {
                 is Resource.Loading -> {

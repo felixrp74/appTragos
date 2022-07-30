@@ -3,4 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="fragment_main">Hello MAIN fragment</string>
     <string name="fragment_tragos_detalle">Hello DETALLE fragment</string>
+    <string name="drinks_favoritos">Drinks favoritos</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
