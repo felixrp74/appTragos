@@ -17,8 +17,13 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_guardar_trago"
         android:src="@drawable/ic_baseline_save_24"
+<<<<<<< HEAD
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+=======
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+>>>>>>> bab6224829fce076904cbcb3e82fbca94a754642
 
     <TextView
         android:id="@+id/tv_titulo"

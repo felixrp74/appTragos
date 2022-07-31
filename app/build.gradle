@@ -3,7 +3,10 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id "kotlin-parcelize"
     id "kotlin-kapt"
+<<<<<<< HEAD
 
+=======
+>>>>>>> bab6224829fce076904cbcb3e82fbca94a754642
 }
 
 android {
@@ -42,6 +45,7 @@ android {
 dependencies {
 
     def nav_version = "2.5.0"
+    def roomVersion = "2.4.2"
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
@@ -72,9 +76,15 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
     //Room
+<<<<<<< HEAD
     implementation 'androidx.room:room-ktx:2.4.3'
     implementation 'androidx.room:room-runtime:2.4.3'
     kapt 'androidx.room:room-compiler:2.4.3'
+=======
+    implementation("androidx.room:room-ktx:2.4.3")
+    annotationProcessor("androidx.room:room-runtime:2.4.3")
+    kapt "androidx.room:room-compiler:2.4.3"
+>>>>>>> bab6224829fce076904cbcb3e82fbca94a754642
 
 
     testImplementation 'junit:junit:4.13.2'

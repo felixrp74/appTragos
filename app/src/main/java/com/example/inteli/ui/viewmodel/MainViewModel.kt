@@ -2,11 +2,13 @@ package com.example.inteli.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.example.inteli.data.model.DrinkEntity
 import com.example.inteli.domain.Repo
 import com.example.inteli.vo.Resource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class MainViewModel(repo: Repo) : ViewModel() {
+class MainViewModel(val repo: Repo) : ViewModel() {
 
     private var tragosData = MutableLiveData<String>()
 
@@ -31,5 +33,23 @@ class MainViewModel(repo: Repo) : ViewModel() {
 
         }
     }
+
+    fun guardarTrago(trago:DrinkEntity){
+        viewModelScope.launch {
+            repo.insertTrago(trago)
+        }
+    }
+
+    fun getTragoFavoritos() = liveData(Dispatchers.IO) {
+        emit(Resource.Loading())
+        try {
+            //Log.d("MAINVIEWMODELFAVORITOS","$nameTrago")
+            emit(repo.getTragosFavoritos())
+        } catch (e: Exception) {
+            emit(Resource.Failure(e))
+        }
+
+    }
+
 
 }

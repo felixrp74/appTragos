@@ -7,6 +7,12 @@
     android:orientation="vertical"
     tools:context=".ui.MainFragment">
 
+    <Button
+        android:id="@+id/btn_drink_favoritos"
+        android:text="@string/drinks_favoritos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
