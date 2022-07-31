@@ -10,11 +10,4 @@ class RepoImpl(private val dataSource: DataSource):Repo {
         return dataSource.getTragoByName(nameTrago)
     }
 
-    override suspend fun getTragosFavoritos(): Resource<List<DrinkEntity>> {
-        return dataSource.getTragosFavoritos()
-    }
-
-    override suspend fun insertTrago(trago: DrinkEntity) {
-        dataSource.insertTragoIntoRoom(trago)
-    }
 }

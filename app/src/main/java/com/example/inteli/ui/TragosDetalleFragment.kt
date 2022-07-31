@@ -22,8 +22,7 @@ import com.example.inteli.vo.Resource
 
 class TragosDetalleFragment : Fragment() {
 
-    private val viewModel by activityViewModels<MainViewModel> { VMFactory(RepoImpl(DataSource(
-        AppDatabase.getInstance(requireActivity().applicationContext)))) }
+    private val viewModel by activityViewModels<MainViewModel> { VMFactory(RepoImpl(DataSource())) }
 
     private lateinit var drink: Drink
     private var _binding: FragmentTragosDetalleBinding? = null
@@ -57,15 +56,7 @@ class TragosDetalleFragment : Fragment() {
         binding.tvConAlcohol.text = drink.conAlcohol
 
         binding.btnGuardarTrago.setOnClickListener {
-            viewModel.guardarTrago(
-                DrinkEntity(
-                    drink.tragoId,
-                    drink.imagen,
-                    drink.nombre,
-                    drink.descripcion,
-                    drink.conAlcohol
-                )
-            )
+
 
             Toast.makeText(
                 requireContext(),
@@ -74,7 +65,7 @@ class TragosDetalleFragment : Fragment() {
             ).show()
         }
 
-
+/*
         viewModel.getTragoFavoritos().observe(viewLifecycleOwner, Observer{ result ->
             when (result) {
                 is Resource.Loading -> {
@@ -105,7 +96,7 @@ class TragosDetalleFragment : Fragment() {
             }
 
         })
-
+*/
         binding.btnGuardarTrago.setOnClickListener {
 
         }

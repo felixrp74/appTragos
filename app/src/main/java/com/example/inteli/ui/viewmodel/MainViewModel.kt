@@ -34,22 +34,6 @@ class MainViewModel(val repo: Repo) : ViewModel() {
         }
     }
 
-    fun guardarTrago(trago:DrinkEntity){
-        viewModelScope.launch {
-            repo.insertTrago(trago)
-        }
-    }
-
-    fun getTragoFavoritos() = liveData(Dispatchers.IO) {
-        emit(Resource.Loading())
-        try {
-            //Log.d("MAINVIEWMODELFAVORITOS","$nameTrago")
-            emit(repo.getTragosFavoritos())
-        } catch (e: Exception) {
-            emit(Resource.Failure(e))
-        }
-
-    }
 
 
 }

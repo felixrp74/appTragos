@@ -26,8 +26,7 @@ import com.example.inteli.vo.Resource
 
 class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
-    private val viewModel by activityViewModels<MainViewModel> { VMFactory(RepoImpl(DataSource(
-        AppDatabase.getInstance(requireActivity().applicationContext)))) }
+    private val viewModel by activityViewModels<MainViewModel> { VMFactory(RepoImpl(DataSource())) }
 
     private var _binding: FragmentMainBinding? = null
 
