@@ -45,6 +45,10 @@ class TragosDetalleFragment : Fragment() {
         binding.tvDescripcionDetalle.text=drink.descripcion
         binding.tvConAlcohol.text=drink.conAlcohol
 
+        binding.btnGuardarTrago.setOnClickListener {
+
+        }
+
     }
 
 

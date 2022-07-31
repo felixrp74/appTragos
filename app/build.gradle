@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id "kotlin-parcelize"
+    id "kotlin-kapt"
+
 }
 
 android {
@@ -54,8 +56,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 
     //KTX ViewModel y LiveData
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.2'
@@ -68,10 +70,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    //implementation 'com.squareup.okhtttp3:logging-interceptor:3.11.0'
 
-    //PhotoView to zoom in and out image
-    //implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+    //Room
+    implementation 'androidx.room:room-ktx:2.4.3'
+    implementation 'androidx.room:room-runtime:2.4.3'
+    kapt 'androidx.room:room-compiler:2.4.3'
 
 
     testImplementation 'junit:junit:4.13.2'
