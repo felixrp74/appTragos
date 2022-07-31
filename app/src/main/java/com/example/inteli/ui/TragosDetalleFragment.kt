@@ -1,5 +1,6 @@
 package com.example.inteli.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -22,7 +23,9 @@ import com.example.inteli.vo.Resource
 
 class TragosDetalleFragment : Fragment() {
 
-    private val viewModel by activityViewModels<MainViewModel> { VMFactory(RepoImpl(DataSource())) }
+    private val viewModel by activityViewModels<MainViewModel> { VMFactory(RepoImpl(DataSource(
+        AppDatabase.getDatabase(requireActivity().applicationContext)
+    ))) }
 
     private lateinit var drink: Drink
     private var _binding: FragmentTragosDetalleBinding? = null
@@ -55,50 +58,20 @@ class TragosDetalleFragment : Fragment() {
         binding.tvDescripcionDetalle.text = drink.descripcion
         binding.tvConAlcohol.text = drink.conAlcohol
 
+
         binding.btnGuardarTrago.setOnClickListener {
+            viewModel.guardarTrago(
+                DrinkEntity(
+                    tragoId = drink.tragoId,
+                    imagen = drink.imagen,
+                    nombre = drink.nombre,
+                    descripcion = drink.descripcion,
+                    conAlcohol = drink.conAlcohol
+                )
+            )
 
-
-            Toast.makeText(
-                requireContext(),
-                "Se ha guardado el trago a favoritos",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-
-/*
-        viewModel.getTragoFavoritos().observe(viewLifecycleOwner, Observer{ result ->
-            when (result) {
-                is Resource.Loading -> {
-                    //binding.progressBar.visibility = View.VISIBLE
-                }
-                is Resource.Success -> {
-                    //binding.progressBar.visibility = View.GONE
-                    //binding.rvTragos.adapter = MainAdapter(result.data, this)
-                    Log.d("LISTA_FAVORITOS", "${result.data}")
-                }
-                is Resource.Failure -> {
-                    //binding.progressBar.visibility = View.GONE
-                    Toast.makeText(
-                        requireContext(),
-                        "ocurrio eerrro trayendo datos ${result.exception}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                    Log.d("FAILURE_GET", "${result.exception}")
-                }
-                else -> {
-                    Toast.makeText(
-                        requireContext(),
-                        "ELSE",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-
-        })
-*/
-        binding.btnGuardarTrago.setOnClickListener {
-
+            Toast.makeText(requireContext(), "Se ha guardado ${drink.nombre} favoritos.", Toast.LENGTH_SHORT)
+                .show()
         }
 
     }

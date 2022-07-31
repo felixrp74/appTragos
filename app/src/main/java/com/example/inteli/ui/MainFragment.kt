@@ -26,7 +26,9 @@ import com.example.inteli.vo.Resource
 
 class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
-    private val viewModel by activityViewModels<MainViewModel> { VMFactory(RepoImpl(DataSource())) }
+    private val viewModel by activityViewModels<MainViewModel> { VMFactory(RepoImpl(DataSource(
+        AppDatabase.getDatabase(requireActivity().applicationContext)
+    ))) }
 
     private var _binding: FragmentMainBinding? = null
 
@@ -50,7 +52,7 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
         setupObervers()
 
         binding.btnDrinkFavoritos.setOnClickListener {
-            findNavController().navigate(R.id.favoritosFragment)
+            findNavController().navigate(R.id.action_mainFragment_to_favoritosFragment)
         }
 
     }

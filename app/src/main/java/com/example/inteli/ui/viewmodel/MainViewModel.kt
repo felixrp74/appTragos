@@ -34,6 +34,14 @@ class MainViewModel(val repo: Repo) : ViewModel() {
         }
     }
 
+    fun guardarTrago(trago:DrinkEntity){
+        viewModelScope.launch {
+            repo.insertTragos(trago)
+        }
+    }
+
+
+
 
 
 }
