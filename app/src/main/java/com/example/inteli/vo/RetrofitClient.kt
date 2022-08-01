@@ -1,7 +1,6 @@
 package com.example.inteli.vo
 
 import com.example.inteli.domain.WebService
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,6 +14,4 @@ object RetrofitClient {
             .build()
             .create(WebService::class.java)
     }
-
-
 }

@@ -4,8 +4,6 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
-import androidx.versionedparcelable.VersionedParcelize
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
@@ -36,7 +34,6 @@ data class DrinkEntity(
     val nombre: String = "",
     @ColumnInfo(name = "trago_descripcion")
     val descripcion: String = "",
-
     @ColumnInfo(name = "trago_con_alcoholk")
     val conAlcohol: String = ""
 )

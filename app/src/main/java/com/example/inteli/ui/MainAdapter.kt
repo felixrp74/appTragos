@@ -21,7 +21,6 @@ class MainAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
-
         return MainViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.tragos_row, parent, false)
         )
@@ -44,14 +43,10 @@ class MainAdapter(
                 .into(binding.imgTrago)
             binding.txtTitulo.text = item.nombre
             binding.txtDescripcion.text = item.descripcion
-
             binding.imgTrago.setOnClickListener {
                 Log.d("CLICK", "CLICKING")
                 itemClickListener.onTragoClick(item)
             }
-
         }
-
     }
-
 }

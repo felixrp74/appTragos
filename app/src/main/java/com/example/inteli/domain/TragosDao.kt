@@ -13,6 +13,4 @@ interface TragosDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTrago(drink:DrinkEntity)
-
-
 }

@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -88,7 +87,6 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
         })
     }
-
 
     private fun setupSearchView(){
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

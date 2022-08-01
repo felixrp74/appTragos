@@ -9,43 +9,76 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.inteli.AppDatabase
 import com.example.inteli.R
 import com.example.inteli.data.DataSource
+import com.example.inteli.data.model.Drink
+import com.example.inteli.databinding.FragmentFavoritosBinding
+import com.example.inteli.databinding.FragmentMainBinding
 import com.example.inteli.domain.RepoImpl
 import com.example.inteli.ui.viewmodel.MainViewModel
 import com.example.inteli.ui.viewmodel.VMFactory
 import com.example.inteli.vo.Resource
 
-class FavoritosFragment : Fragment() {
+class FavoritosFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
     private val viewModel by activityViewModels<MainViewModel> {
         VMFactory(RepoImpl(DataSource(AppDatabase.getDatabase(requireActivity().applicationContext))))
     }
+    private var _binding: FragmentFavoritosBinding? = null
+
+    // This property is only valid between onCreateView and onDestroyView.
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favoritos, container, false)
+        _binding = FragmentFavoritosBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fetchTragosList.observe(viewLifecycleOwner, Observer{ result ->
+        setupRecyclerView()
+        setupObervers()
+    }
+
+    private fun setupRecyclerView() {
+        binding.rvTragosFavoritos.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvTragosFavoritos.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
+    }
+
+    private fun setupObervers() {
+        viewModel.fetchTragosFavoritoList.observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Loading -> {
-                    //binding.progressBar.visibility = View.VISIBLE
                 }
                 is Resource.Success -> {
-                    /*binding.progressBar.visibility = View.GONE
-                    binding.rvTragos.adapter = MainAdapter(result.data, this)*/
 
-                    Log.d("LIST_DRINK_FAVORITE","${result.data}")
+                    val drink = result.data.map {
+                        Drink(
+                            tragoId = it.tragoId,
+                            imagen = it.imagen,
+                            nombre = it.nombre,
+                            descripcion = it.descripcion,
+                            conAlcohol = it.conAlcohol
+                        )
+                    }
+
+                    binding.rvTragosFavoritos.adapter = MainAdapter(drink, this)
+
+                    Log.d("LIST_DRINK_FAVORITE", "${result.data}")
                 }
                 is Resource.Failure -> {
-                    //binding.progressBar.visibility = View.GONE
                     Toast.makeText(
                         requireContext(),
                         "ocurrio eerrro trayendo datos ${result.exception}",
@@ -62,9 +95,15 @@ class FavoritosFragment : Fragment() {
                     ).show()
                 }
             }
-
         })
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
+    override fun onTragoClick(drink: Drink) {
+        TODO("Not yet implemented")
+    }
 }

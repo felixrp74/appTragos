@@ -1,6 +1,5 @@
 package com.example.inteli.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.inteli.AppDatabase
 import com.example.inteli.data.DataSource
@@ -19,13 +17,18 @@ import com.example.inteli.databinding.FragmentTragosDetalleBinding
 import com.example.inteli.domain.RepoImpl
 import com.example.inteli.ui.viewmodel.MainViewModel
 import com.example.inteli.ui.viewmodel.VMFactory
-import com.example.inteli.vo.Resource
 
 class TragosDetalleFragment : Fragment() {
 
-    private val viewModel by activityViewModels<MainViewModel> { VMFactory(RepoImpl(DataSource(
-        AppDatabase.getDatabase(requireActivity().applicationContext)
-    ))) }
+    private val viewModel by activityViewModels<MainViewModel> {
+        VMFactory(
+            RepoImpl(
+                DataSource(
+                    AppDatabase.getDatabase(requireActivity().applicationContext)
+                )
+            )
+        )
+    }
 
     private lateinit var drink: Drink
     private var _binding: FragmentTragosDetalleBinding? = null
@@ -58,7 +61,6 @@ class TragosDetalleFragment : Fragment() {
         binding.tvDescripcionDetalle.text = drink.descripcion
         binding.tvConAlcohol.text = drink.conAlcohol
 
-
         binding.btnGuardarTrago.setOnClickListener {
             viewModel.guardarTrago(
                 DrinkEntity(
@@ -69,9 +71,11 @@ class TragosDetalleFragment : Fragment() {
                     conAlcohol = drink.conAlcohol
                 )
             )
-
-            Toast.makeText(requireContext(), "Se ha guardado ${drink.nombre} favoritos.", Toast.LENGTH_SHORT)
-                .show()
+            Toast.makeText(
+                requireContext(),
+                "Se ha guardado ${drink.nombre} favoritos.",
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
     }

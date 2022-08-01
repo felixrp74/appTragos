@@ -9,5 +9,4 @@ class VMFactory(private val repo: Repo):ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
         return modelClass.getConstructor(Repo::class.java).newInstance(repo)
     }
-
 }

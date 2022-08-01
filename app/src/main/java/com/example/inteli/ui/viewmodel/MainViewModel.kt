@@ -14,7 +14,6 @@ class MainViewModel(val repo: Repo) : ViewModel() {
 
     fun setTrago(nameTrago: String) {
         tragosData.value = nameTrago
-
     }
 
     init {
@@ -27,6 +26,18 @@ class MainViewModel(val repo: Repo) : ViewModel() {
             try {
                 Log.d("MAINVIEWMODEL","$nameTrago")
                 emit(repo.getTragosList(nameTrago))
+            } catch (e: Exception) {
+                emit(Resource.Failure(e))
+            }
+        }
+    }
+
+    val fetchTragosFavoritoList = tragosData.distinctUntilChanged().switchMap { nameTrago ->
+        liveData(Dispatchers.IO) {
+            emit(Resource.Loading())
+            try {
+                Log.d("MAINVIEWMODEL","$nameTrago")
+                emit(repo.getTragosFavoritos())
             } catch (e: Exception) {
                 emit(Resource.Failure(e))
             }

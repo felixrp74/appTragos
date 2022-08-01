@@ -7,17 +7,13 @@ import androidx.room.RoomDatabase
 import com.example.inteli.data.model.DrinkEntity
 import com.example.inteli.domain.TragosDao
 
-
-//es el punto de partida de la instancia de ROOM
-
+//Es el punto de partida de la instancia de ROOM
 @Database(entities = [DrinkEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun TragoDao(): TragosDao
 
-
     companion object {
         private var INSTANCE: AppDatabase? = null
-
 
         fun getDatabase(context: Context): AppDatabase {
             INSTANCE = INSTANCE ?: Room.databaseBuilder(
@@ -26,14 +22,10 @@ abstract class AppDatabase : RoomDatabase() {
                 "tabla_tragos"
             ).build()
             return INSTANCE!!
-
         }
 
         fun destroyInstance(){
             INSTANCE = null
         }
     }
-
-
-
 }

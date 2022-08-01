@@ -17,5 +17,4 @@ class RepoImpl(private val dataSource: DataSource):Repo {
     override suspend fun insertTragos(trago: DrinkEntity) {
         dataSource.guardarTrago(trago)
     }
-
 }
